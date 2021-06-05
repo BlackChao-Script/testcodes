@@ -9,7 +9,7 @@ module.exports={
         .set('@',resolve('./src'))
         .set('_c',resolve('./src/components'))
         .set('_v',resolve('./src/views'))
-        .set('_a',resolve('src/assets'))
+        .set('_a',resolve('.src/assets'))
     //set第一个参数：设置的别名，第二个参数：设置的路径
 
   }
