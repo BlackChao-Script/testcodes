@@ -3,13 +3,15 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <home-swiper :banners="banners"></home-swiper>
+    <home-swiper :banners="banners" ></home-swiper>
+    <recommended-view :recommends="recommends"></recommended-view>
   </div>
 </template>
 
 <script>
 import navBar from "_c/common/navbar/navBar";
 import homeSwiper from './childComps/homeSwiper'
+import recommendedView from './childComps/recommendedView'
 
 import { getHomeMultidata } from "@/network/home";
 
@@ -24,7 +26,8 @@ export default {
   },
   components: {
     navBar,
-    homeSwiper
+    homeSwiper,
+    recommendedView,
   },
   created() {
     //1.请求多个数据
