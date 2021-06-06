@@ -39,5 +39,4 @@ import tabBarItem from '_c/common/tabbar/tabBarItem'
 </script>
 
 <style lang="scss" scoped>
-
 </style>
