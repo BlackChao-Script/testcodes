@@ -6,7 +6,9 @@
 
 <script>
   export default {
-    name:'classify'
+    name:'classify',
+    components:{
+    }
   }
 </script>
 

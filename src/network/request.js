@@ -10,14 +10,14 @@ export function request(config) {
     (config) => {
       return config;
     },
-    (error) => {}
+    (err) => {}
   );
 
   instance.interceptors.response.use(
     (res) => {
       return res.data;
     },
-    (error) => {}
+    (err) => {}
   );
 
   return instance(config);

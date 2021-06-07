@@ -1,21 +1,21 @@
 <template>
   <div id="home">
-    <!-- 页面头部nav模块 -->
+    <!-- 页面头部nav组件模块 -->
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <!-- 轮播图模块 -->
+    <!-- 轮播图组件模块 -->
     <home-swiper :banners="banners"></home-swiper>
-    <!-- 推荐模块 -->
+    <!-- 推荐组件模块 -->
     <recommended-view :recommends="recommends"></recommended-view>
-    <!-- 流行推荐模块 -->
+    <!-- 流行推荐组件模块 -->
     <home-popular></home-popular>
-    <!-- 控制模块 -->
+    <!-- 控制组件模块 -->
     <tab-control
       class="tab-control"
       :titles="['流行', '新款', '精选']"
     ></tab-control>
-    <!-- 商品列表信息模块 -->
+    <!-- 商品列表信息组件模块 -->
     <goods-list :goods="goods['pop'].list"></goods-list>
     <ul>
       <li>列表1</li>
