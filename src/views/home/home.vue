@@ -14,9 +14,10 @@
     <tab-control
       class="tab-control"
       :titles="['流行', '新款', '精选']"
+      @tabClick="tabClick"
     ></tab-control>
     <!-- 商品列表信息组件模块 -->
-    <goods-list :goods="goods['pop'].list"></goods-list>
+    <goods-list :goods="showGoods"></goods-list>
     <ul>
       <li>列表1</li>
       <li>列表2</li>
@@ -55,7 +56,13 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] },
       },
+      currentType: "pop",
     };
+  },
+  computed: {
+    showGoods() {
+      return this.goods[this.currentType].list;
+    },
   },
   // 注册组件
   components: {
@@ -77,6 +84,22 @@ export default {
     this.getHomeGoods("sell");
   },
   methods: {
+    // 时间监听相关的方法
+    tabClick(index) {
+      switch (index) {
+        case 0:
+          this.currentType = "pop";
+          break;
+        case 1:
+          this.currentType = "new";
+          break;
+        case 2:
+          this.currentType = "sell";
+          break;
+      }
+    },
+
+    // 网络请求相关的方法
     getHomeMultidata() {
       getHomeMultidata().then((res) => {
         this.banners = res.data.banner.list;

@@ -31,6 +31,8 @@ export default {
   methods: {
     tabClick(index) {
       this.currentIndex = index;
+      // 子传父
+      this.$emit('tabClick',index)
     },
   },
 };
