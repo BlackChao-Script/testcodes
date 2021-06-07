@@ -27,14 +27,14 @@ export default {
 <style lang="scss" scoped>
 .goodsItem {
   width: 46%;
+  margin-bottom: 5px;
 }
 .goodsItem img {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 .goods-info {
   font-size: 12px;
-  overflow: hidden;
   text-align: center;
 }
 .goods-info p {

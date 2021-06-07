@@ -31,7 +31,7 @@ export default {
 <style lang="scss" scoped>
 .goodslist {
   display: flex;
-  // 多余元素换行显示
+  // 根据页面大小,多余元素换行显示
   flex-wrap: wrap;
   // 等比分部空间
   justify-content: space-evenly;

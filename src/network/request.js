@@ -1,22 +1,24 @@
-import axios from 'axios'
+import axios from "axios";
 
-export function request(config){
+export function request(config) {
   const instance = axios.create({
-    baseURL: 'http://152.136.185.210:7878/api/m5',
-    timeout: 10000
-  })
+    baseURL: "http://152.136.185.210:7878/api/m5",
+    timeout: 10000,
+  });
 
-  instance.interceptors.request.use(config=>{
-    return config
-  },error => {
+  instance.interceptors.request.use(
+    (config) => {
+      return config;
+    },
+    (error) => {}
+  );
 
-  })
+  instance.interceptors.response.use(
+    (res) => {
+      return res.data;
+    },
+    (error) => {}
+  );
 
-  instance.interceptors.response.use(res =>{
-    return res.data
-  },error => {
-
-  })
-
-  return instance(config)
+  return instance(config);
 }
