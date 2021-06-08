@@ -73,7 +73,7 @@ export default {
     TabControl,
     goodsList,
   },
-  // 生命周期函数(创建页面时执行) 请求数据
+  // 生命周期函数(组件创建完后调用) 请求数据
   created() {
     //1.请求多个数据
     this.getHomeMultidata();
