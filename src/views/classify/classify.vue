@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <ul class="content">
+      <button @click="btnClick">按钮</button>
       <li>分类列表1</li>
       <li>分类列表2</li>
       <li>分类列表3</li>
@@ -119,15 +120,20 @@ export default {
     this.scroll = new bScroll(document.querySelector(".wrapper"), {
       // 实时监听( 3 包括惯性滚动)
       probeType: 3,
-      pullUpload:true,
+      pullUpLoad:true,
     });
     this.scroll.on('scroll',(position)=>{
       console.log(position);
     });
-    this.scroll.on('pullUpload',()=>{
+    this.scroll.on('pullingUp',()=>{
       console.log('上拉加载更多');
     })
   },
+  methods:{
+    btnClick(){
+      console.log('点击了');
+    }
+  }
 };
 </script>
 

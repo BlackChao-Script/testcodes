@@ -4,32 +4,33 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <!-- 轮播图组件模块 -->
-    <home-swiper :banners="banners"></home-swiper>
-    <!-- 推荐组件模块 -->
-    <recommended-view :recommends="recommends"></recommended-view>
-    <!-- 流行推荐组件模块 -->
-    <home-popular></home-popular>
-    <!-- 控制组件模块 -->
-    <tab-control
-      class="tab-control"
-      :titles="['流行', '新款', '精选']"
-      @tabClick="tabClick"
-    ></tab-control>
-    <!-- 商品列表信息组件模块 -->
-    <goods-list :goods="showGoods"></goods-list>
-    <ul>
-      <li>列表1</li>
-      <li>列表2</li>
-      <li>列表3</li>
-      <li>列表4</li>
-      <li>列表5</li>
-      <li>列表6</li>
-      <li>列表7</li>
-      <li>列表8</li>
-      <li>列表9</li>
-      <li>列表10</li>
-    </ul>
+    <!-- 页面滚动组件模块 -->
+    <scroll
+      class="conter"
+      ref="scroll"
+      :probe-type="3"
+      @scroll="contentScroll"
+      :pull-up-load="true"
+      @pullingUp="loadMore"
+    >
+      <!-- 轮播图组件模块 -->
+      <home-swiper :banners="banners"></home-swiper>
+      <!-- 推荐组件模块 -->
+      <recommended-view :recommends="recommends"></recommended-view>
+      <!-- 流行推荐组件模块 -->
+      <home-popular></home-popular>
+      <!-- 控制组件模块 -->
+      <tab-control
+        class="tab-control"
+        :titles="['流行', '新款', '精选']"
+        @tabClick="tabClick"
+      ></tab-control>
+      <!-- 商品列表信息组件模块 -->
+      <goods-list :goods="showGoods"></goods-list>
+    </scroll>
+    <!-- 返回顶部小组件模块 -->
+    <!-- .nattive 修饰符 监听组件根元素的原生事件 -->
+    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -42,6 +43,8 @@ import homePopular from "./childComps/homePopular";
 import navBar from "_c/common/navbar/navBar";
 import TabControl from "_c/content/tabControl/TabControl";
 import goodsList from "_c/content/goods/goodList";
+import scroll from "_c/common/scroll/scroll";
+import backTop from "_c/content/backTop/backTop";
 // 引入网络接口数据
 import { getHomeMultidata, getHomeGoods } from "@/network/home";
 
@@ -57,6 +60,7 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: "pop",
+      isShowBackTop: false,
     };
   },
   computed: {
@@ -72,6 +76,8 @@ export default {
     navBar,
     TabControl,
     goodsList,
+    scroll,
+    backTop,
   },
   // 生命周期函数(组件创建完后调用) 请求数据
   created() {
@@ -84,7 +90,7 @@ export default {
     this.getHomeGoods("sell");
   },
   methods: {
-    // 时间监听相关的方法
+    // 事件监听相关的方法
     tabClick(index) {
       switch (index) {
         case 0:
@@ -97,6 +103,15 @@ export default {
           this.currentType = "sell";
           break;
       }
+    },
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0);
+    },
+    contentScroll(position) {
+      this.isShowBackTop = -position.y > 1000;
+    },
+    loadMore() {
+      this.getHomeGoods(this.currentType);
     },
 
     // 网络请求相关的方法
@@ -112,6 +127,8 @@ export default {
         // 把data里面的list添加到goods的list里面
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
+
+        this.$refs.scroll.finishPullUp();
       });
     },
   },
@@ -134,5 +151,12 @@ export default {
 .tab-control {
   position: sticky;
   top: 44px;
+  z-index: 9;
+}
+.conter {
+  /* calc动态计算 */
+  /* vh 视口高度 */
+  height: calc(100vh - 93px);
+  overflow: hidden;
 }
 </style>
