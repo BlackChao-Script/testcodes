@@ -4,6 +4,14 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
+    <!--页面滚动到原组件时用于替换scroll里面的控制组件模块 -->
+    <tab-control
+      :titles="['流行', '新款', '精选']"
+      @tabClick="tabClick"
+      ref="tabControl"
+      v-show="isTabFixed"
+    ></tab-control>
+
     <!-- 页面滚动组件模块 -->
     <scroll
       class="conter"
@@ -15,19 +23,24 @@
     >
       <!-- 轮播图组件模块 -->
       <home-swiper :banners="banners"></home-swiper>
+
       <!-- 推荐组件模块 -->
       <recommended-view :recommends="recommends"></recommended-view>
+
       <!-- 流行推荐组件模块 -->
       <home-popular></home-popular>
+
       <!-- 控制组件模块 -->
       <tab-control
-        class="tab-control"
         :titles="['流行', '新款', '精选']"
         @tabClick="tabClick"
+        ref="tabControl"
       ></tab-control>
+
       <!-- 商品列表信息组件模块 -->
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
+
     <!-- 返回顶部小组件模块 -->
     <!-- .nattive 修饰符 监听组件根元素的原生事件 -->
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
@@ -61,6 +74,8 @@ export default {
       },
       currentType: "pop",
       isShowBackTop: false,
+      taboffsetTop: 0,
+      isTabFixed: false,
     };
   },
   computed: {
@@ -89,6 +104,13 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
+  mounted() {
+    // 获取 tabControl 的 offsetTop
+    // 所有组件都有一个属性 $el: 用于获取组件中的元素
+    setTimeout(() => {
+      this.taboffsetTop = this.$refs.tabControl.$el.offsetTop;
+    }, 500);
+  },
   methods: {
     // 事件监听相关的方法
     tabClick(index) {
@@ -104,16 +126,18 @@ export default {
           break;
       }
     },
+    loadMore() {
+      // 上拉加载更多数据
+      this.getHomeGoods(this.currentType);
+    },
     backClick() {
       this.$refs.scroll.scrollTo(0, 0);
     },
     contentScroll(position) {
+      // 判断BackTop是否显示
       this.isShowBackTop = -position.y > 1000;
-    },
-    loadMore() {
-      this.getHomeGoods(this.currentType);
-
-      this.$refs.scroll.refresh()
+      // 决定tabcControl是否吸顶（position: fixed）
+      this.isTabFixed = -position.y > this.taboffsetTop;
     },
 
     // 网络请求相关的方法
@@ -130,7 +154,8 @@ export default {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
 
-        this.$refs.scroll.finishPullUp();
+        // 完成上拉加载更多
+        this.$refs.scroll.scroll.finishPullUp();
       });
     },
   },
@@ -149,11 +174,6 @@ export default {
   right: 0;
   top: 0;
   z-index: 10;
-}
-.tab-control {
-  position: sticky;
-  top: 44px;
-  z-index: 9;
 }
 .conter {
   /* calc动态计算 */

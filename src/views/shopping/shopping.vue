@@ -121,6 +121,6 @@ import scroll from '_c/common/scroll/scroll'
 .conten{
   height: calc(100vh - 49px);
   overflow: hidden;
-  background-color: rosybrown;
+  background-image: linear-gradient(to top, #fbe8e7 0%, #ffc4d0 100%);
 }
 </style>
