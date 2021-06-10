@@ -8,8 +8,9 @@
     <tab-control
       :titles="['流行', '新款', '精选']"
       @tabClick="tabClick"
-      ref="tabControl"
+      ref="tabControl1"
       v-show="isTabFixed"
+      class="tab-con"
     ></tab-control>
 
     <!-- 页面滚动组件模块 -->
@@ -34,7 +35,7 @@
       <tab-control
         :titles="['流行', '新款', '精选']"
         @tabClick="tabClick"
-        ref="tabControl"
+        ref="tabControl2"
       ></tab-control>
 
       <!-- 商品列表信息组件模块 -->
@@ -108,7 +109,7 @@ export default {
     // 获取 tabControl 的 offsetTop
     // 所有组件都有一个属性 $el: 用于获取组件中的元素
     setTimeout(() => {
-      this.taboffsetTop = this.$refs.tabControl.$el.offsetTop;
+      this.taboffsetTop = this.$refs.tabControl2.$el.offsetTop;
     }, 500);
   },
   methods: {
@@ -125,6 +126,8 @@ export default {
           this.currentType = "sell";
           break;
       }
+      this.$refs.tabControl1.currentIndex = index
+      this.$refs.tabControl2.currentIndex = index
     },
     loadMore() {
       // 上拉加载更多数据
@@ -163,22 +166,28 @@ export default {
 </script>
 
 <style scoped>
-#home {
-  margin-top: 44px;
-}
 .home-nav {
   background-color: var(--color-tint);
   color: white;
-  position: fixed;
+
+  /* 在使用浏览器原生滚动时,为了让导航不跟随一起滚动 */
+  /* position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  z-index: 10;
+  z-index: 10; */
 }
 .conter {
   /* calc动态计算 */
   /* vh 视口高度 */
   height: calc(100vh - 93px);
   overflow: hidden;
+}
+.tab-con{
+  position: fixed;
+  top: 42px;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 </style>

@@ -5,6 +5,7 @@ const home = () => import("_v/home/home.vue");
 const classify = () => import("_v/classify/classify.vue");
 const shopping = () => import("_v/shopping/shopping.vue");
 const mine = () => import("_v/mine/mine.vue");
+const detail = () => import("_v/detail/detail");
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,11 @@ const routes = [
     path: "/mine",
     name: "mine",
     component: mine,
+  },
+  {
+    path: "/detail/:id",
+    name: "detail",
+    component: detail,
   },
 ];
 
