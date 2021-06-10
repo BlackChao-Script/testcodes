@@ -12,7 +12,6 @@
       v-show="isTabFixed"
       class="tab-con"
     ></tab-control>
-
     <!-- 页面滚动组件模块 -->
     <scroll
       class="conter"
@@ -24,24 +23,19 @@
     >
       <!-- 轮播图组件模块 -->
       <home-swiper :banners="banners"></home-swiper>
-
       <!-- 推荐组件模块 -->
       <recommended-view :recommends="recommends"></recommended-view>
-
       <!-- 流行推荐组件模块 -->
       <home-popular></home-popular>
-
       <!-- 控制组件模块 -->
       <tab-control
         :titles="['流行', '新款', '精选']"
         @tabClick="tabClick"
         ref="tabControl2"
       ></tab-control>
-
       <!-- 商品列表信息组件模块 -->
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
-
     <!-- 返回顶部小组件模块 -->
     <!-- .nattive 修饰符 监听组件根元素的原生事件 -->
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
