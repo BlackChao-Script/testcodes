@@ -70,12 +70,15 @@ export default {
     // 2.根据iid请求详情数据
     getDetail(this.iid).then((res) => {
       console.log(res);
-      this.topImages = res.result.itemInfo.topImages;
-      this.itemInfo = res.result.itemInfo;
-      this.columns = res.result.columns;
-      this.shopInfo = res.result.shopInfo;
-      this.detailInfo = res.result.detailInfo;
-      this.rate = res.result.rate;
+      const data = res.result;
+      // 请求轮播图数据
+      this.topImages = data.itemInfo.topImages;
+      // 请求商品数据信息
+      this.itemInfo = data.itemInfo;
+      this.columns = data.columns;
+      this.shopInfo = data.shopInfo;
+      this.detailInfo = data.detailInfo;
+      this.rate = data.rate;
     });
   },
   mounted() {

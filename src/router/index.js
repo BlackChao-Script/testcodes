@@ -16,27 +16,27 @@ const routes = [
   },
   {
     path: "/home",
-    name: "home",
+    // name: "home",
     component: home,
   },
   {
     path: "/classify",
-    name: "classify",
+    // name: "classify",
     component: classify,
   },
   {
     path: "/shopping",
-    name: "shopping",
+    // name: "shopping",
     component: shopping,
   },
   {
     path: "/mine",
-    name: "mine",
+    // name: "mine",
     component: mine,
   },
   {
     path: "/detail/:id",
-    name: "detail",
+    // name: "detail",
     component: detail,
   },
 ];
