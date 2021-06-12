@@ -9,7 +9,8 @@
       <span>{{ rate.list[0].user.uname }}</span>
     </div>
     <p class="userComments">{{ rate.list[0].content }}</p>
-    <p class="style">{{ rate.list[0].style }}</p>
+    <span class="data">{{ rate.list[0].created | fromatDate }}</span>
+    <span class="style"> {{ rate.list[0].style }}</span>
     <div class="userimages">
       <div
         class="userImg"
@@ -25,6 +26,11 @@
 <script>
 export default {
   name: "detailComments",
+  data() {
+    return {
+      createDate: null,
+    };
+  },
   props: {
     rate: {
       type: Object,
@@ -69,7 +75,9 @@ export default {
   padding-left: 10px;
   margin-top: 10px;
 }
+.data,
 .style {
+  font-size: 12px;
   margin-top: 10px;
   padding-left: 10px;
 }
@@ -78,8 +86,8 @@ export default {
   margin-top: 10px;
 }
 .userImg img {
- width: 100px;
- margin-left: 5px;
- flex: 1;
+  width: 100px;
+  margin-left: 5px;
+  flex: 1;
 }
 </style>

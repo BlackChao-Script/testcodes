@@ -21,7 +21,7 @@
         <div v-for="(item, index) in shopInfo.score" :key="index">
           <div class="nasc">
             <span class="name">{{ item.name }}</span>
-            <span class="score">{{ item.score }}</span>
+            <span class="score" :class="{'score-better': item.isBetter}">{{ item.score }}</span>
           </div>
         </div>
       </div>
@@ -99,13 +99,17 @@ export default {
   margin-top: 10px;
 }
 .nasc {
+  margin-left: 10px;
   margin-top: 5px;
 }
 .name {
-  margin-right: 10px;
+  margin-right: 15px;
 }
 .score {
   color: var(--color-high-text);
+}
+.score-better {
+  color:#5ea732
 }
 .enter {
   margin-top: 10px;
@@ -117,7 +121,7 @@ export default {
 }
 .enter div {
   width: 200px;
-  margin-left: 20%;
+  margin-left: 23%;
   border-radius: 15px;
   background-color: #f2f4fb;
 }

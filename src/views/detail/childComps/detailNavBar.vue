@@ -7,14 +7,8 @@
         @click="leftClick"
       ></span>
       <div slot="center" class="center">
-        <div
-          class="center-item"
-          v-for="(item, index) in titles"
-          :key="index"
-          @click="centerClick(index)"
-          :class="{ isClass: index === centerItem }"
-        >
-          {{ item }}
+        <div class="center-item">
+          {{ titles }}
         </div>
       </div>
     </nav-bar>
@@ -30,13 +24,14 @@ export default {
   },
   data() {
     return {
-      titles: ["商品", "评论", "推荐"],
+      titles: "商品详细",
       centerItem: 0,
     };
   },
   methods: {
     centerClick(index) {
       this.centerItem = index;
+      this.$emit("titleClick", index);
     },
     leftClick() {
       this.$router.go(-1);
@@ -46,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.detailNavVar{
+.detailNavVar {
   position: fixed;
   top: 0;
   left: 0;
@@ -60,11 +55,10 @@ export default {
 .center-item {
   flex: 1;
   font-size: 15px;
+  margin-top: 5px;
+  color: var(--color-high-text);
 }
 .icon-zuojiantou {
   font-size: 25px;
-}
-.isClass {
-  color: var(--color-high-text);
 }
 </style>

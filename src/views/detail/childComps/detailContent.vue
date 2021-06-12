@@ -54,6 +54,7 @@ export default {
   text-overflow: ellipsis;
 }
 .NowPrice {
+  margin-left: 10px;
   font-size: 25px;
   color: var(--color-high-text);
 }

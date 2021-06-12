@@ -16,27 +16,26 @@ const routes = [
   },
   {
     path: "/home",
-    // name: "home",
     component: home,
+    meta: { footShow: true },
   },
   {
     path: "/classify",
-    // name: "classify",
     component: classify,
+    meta: { footShow: true },
   },
   {
     path: "/shopping",
-    // name: "shopping",
     component: shopping,
+    meta: { footShow: true },
   },
   {
     path: "/mine",
-    // name: "mine",
     component: mine,
+    meta: { footShow: true },
   },
   {
     path: "/detail/:id",
-    // name: "detail",
     component: detail,
   },
 ];

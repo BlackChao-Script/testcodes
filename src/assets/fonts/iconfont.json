@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "700812",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "949557",
+      "name": "店铺",
+      "font_class": "dianpu",
+      "unicode": "e655",
+      "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "6626329",
+      "name": "客服",
+      "font_class": "kefu",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
       "icon_id": "2699971",
       "name": "对",
       "font_class": "dui",

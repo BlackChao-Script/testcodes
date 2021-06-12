@@ -12,16 +12,12 @@
     <detail-shop :shopInfo="shopInfo"></detail-shop>
     <!-- 穿衣效果组件模块 -->
     <detail-tai :detailTais="detailInfo"></detail-tai>
-    <!-- 返回顶部组件模块 -->
-    <div v-if="backTop" @click="backTopFun">
-      <back-top></back-top>
-    </div>
     <!-- 用户评论组件模块 -->
     <detail-comments :rate="rate"></detail-comments>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
+    <!-- 推荐组件模块 -->
+    <detail-recomment :recommentImg="recommentImg"></detail-recomment>
+    <!-- 底部工具栏组件模块 -->
+    <tool-nav></tool-nav>
   </div>
 </template>
 
@@ -34,10 +30,10 @@ import contentFreight from "./childComps/contentFreight";
 import detailShop from "./childComps/detailShop";
 import detailTai from "./childComps/detailTai";
 import detailComments from "./childComps/detailComments";
-// 引入公共组件
-import backTop from "_c/content/backTop/backTop";
+import detailRecomment from "./childComps/detailRecomment";
+import toolNav from './childComps/toolNav'
 // 引入网络接口数据
-import { getDetail } from "@/network/detail";
+import { getDetail, getRecomment } from "@/network/detail";
 
 export default {
   name: "detail",
@@ -52,6 +48,8 @@ export default {
       backTop: false,
       itemParams: {},
       rate: {},
+      recommentImg: [],
+      themeTopYs:[0,1000,2000],
     };
   },
   components: {
@@ -61,8 +59,9 @@ export default {
     contentFreight,
     detailShop,
     detailTai,
-    backTop,
     detailComments,
+    detailRecomment,
+    toolNav
   },
   created() {
     // 1.保存传入的iid
@@ -79,25 +78,11 @@ export default {
       this.shopInfo = data.shopInfo;
       this.detailInfo = data.detailInfo;
       this.rate = data.rate;
+      // 请求推荐数据
+      getRecomment().then((res) => {
+        this.recommentImg = res.data.list;
+      });
     });
-  },
-  mounted() {
-    // 监听 backTopScroll 事件
-    window.addEventListener("scroll", this.backTopScroll);
-  },
-  methods: {
-    // 回到顶部
-    backTopScroll() {
-      if (window.scrollY > window.screen.height / 0.5) {
-        this.backTop = true;
-      } else {
-        this.backTop = false;
-      }
-    },
-    // 点击回到顶部
-    backTopFun() {
-      document.documentElement.scrollTop = 0;
-    },
   },
 };
 </script>
