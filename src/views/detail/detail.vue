@@ -49,7 +49,6 @@ export default {
       itemParams: {},
       rate: {},
       recommentImg: [],
-      themeTopYs:[0,1000,2000],
     };
   },
   components: {
