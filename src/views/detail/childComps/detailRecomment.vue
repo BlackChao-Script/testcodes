@@ -11,7 +11,7 @@
         :key="index"
         class="recommentImg"
       >
-        <img :src="item.image" />
+        <img v-lazy="item.image" />
         <p>{{ item.title }}</p>
         <div class="content">
           <span class="price">{{ item.price }}</span>

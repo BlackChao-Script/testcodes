@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="reghttool">
-      <div class="join">加入购物车</div>
+      <div class="join" @click="addToCart">加入购物车</div>
       <div class="buy">立即购买</div>
     </div>
   </div>
@@ -24,6 +24,11 @@
 <script>
 export default {
   name: "toolNav",
+  methods:{
+    addToCart(){
+     this.$emit('addToCart')
+    }
+  }
 };
 </script>
 

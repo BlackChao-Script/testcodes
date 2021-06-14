@@ -17,7 +17,7 @@
     <!-- 推荐组件模块 -->
     <detail-recomment :recommentImg="recommentImg"></detail-recomment>
     <!-- 底部工具栏组件模块 -->
-    <tool-nav></tool-nav>
+    <tool-nav @addToCart="addCart"></tool-nav>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ import detailShop from "./childComps/detailShop";
 import detailTai from "./childComps/detailTai";
 import detailComments from "./childComps/detailComments";
 import detailRecomment from "./childComps/detailRecomment";
-import toolNav from './childComps/toolNav'
+import toolNav from "./childComps/toolNav";
 // 引入网络接口数据
 import { getDetail, getRecomment } from "@/network/detail";
 
@@ -60,7 +60,7 @@ export default {
     detailTai,
     detailComments,
     detailRecomment,
-    toolNav
+    toolNav,
   },
   created() {
     // 1.保存传入的iid
@@ -82,6 +82,20 @@ export default {
         this.recommentImg = res.data.list;
       });
     });
+  },
+  methods: {
+    addCart() {
+      // 1.获取购物车需要展示的信息
+      const product = {};
+      product.image = this.topImages[0];
+      product.title = this.itemInfo.title;
+      product.desc = this.itemInfo.desc;
+      product.price = this.itemInfo.highNowPrice;
+      product.iid = this.iid;
+      //2.将商品添加到购物车里面
+      // this.$store.commit("addCart", product);
+      this.$store.dispatch("addCart", product);
+    },
   },
 };
 </script>

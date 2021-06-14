@@ -7,7 +7,7 @@
       <p class="detailImageTitle">{{ detailTais.detailImage[0].key }}</p>
     </div>
     <div class="detailImages" v-for="(item ,index) in detailTais.detailImage[0].list" :key="index">
-      <img :src="item" alt="">
+      <img v-lazy="item" alt="">
     </div>
   </div>
 </template>

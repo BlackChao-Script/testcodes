@@ -3,6 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
+// 导入图片懒加载组件
+import load from"vue-lazyload"
+
 // 导入时间格式化组件
 import moment from "moment";
 
@@ -13,6 +16,9 @@ import iconfont from "./assets/fonts/iconfont.css";
 Vue.filter("fromatDate", function(value) {
   return moment(value).format("MM-DD h:mm");
 });
+
+// 使用图片懒加载
+Vue.use(load)
 
 Vue.config.productionTip = false;
 
