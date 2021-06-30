@@ -41,6 +41,5 @@ export default {
 }
 .icon-dui {
   margin-right: 2px;
-  color: aqua;
 }
 </style>
