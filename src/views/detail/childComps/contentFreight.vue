@@ -39,7 +39,8 @@ export default {
   flex: 1;
   margin-right: 9px;
 }
-.icon-dui{
+.icon-dui {
   margin-right: 2px;
+  color: red;
 }
 </style>
